@@ -12,6 +12,11 @@ function getComputerChoice() {
 
 //Get user's input of rock, paper or scissors, store in playerSelection
 let playerSelection = prompt('Enter Rock, Paper or Scissors, please:');
+
+while (playerSelection.toUpperCase() !== 'ROCK' && playerSelection.toUpperCase() !== 'PAPER' && playerSelection.toUpperCase() !== 'SCISSORS') {
+    playerSelection = prompt('Hmm... why don\'t we try that again. Rock, paper or scissors, please.');
+}
+
 console.log(playerSelection);
 
 //Write function to compare computerSelection and playerSelection and return win or lose
@@ -43,9 +48,9 @@ function playRound (player, comp) {
 
 // Determine if win, loss or tie
 if (playRound(playerSelection, computerSelection) === 'TIE') {
-    console.log('Tie game!');
+    alert('Tie game!');
 } else if (playRound(playerSelection, computerSelection) === true) {
-    console.log('Congrats! ' + playerSelection.toUpperCase() + ' beats ' + computerSelection + '!');
+    alert('Congrats! ' + playerSelection.toUpperCase() + ' beats ' + computerSelection + '!');
 } else if (playRound(playerSelection, computerSelection) === false) {
-    console.log('Sorry! ' + computerSelection + ' beats ' + playerSelection.toUpperCase() + '!');
+    alert('Sorry! ' + computerSelection + ' beats ' + playerSelection.toUpperCase() + '!');
 }
