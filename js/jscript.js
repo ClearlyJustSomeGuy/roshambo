@@ -2,35 +2,10 @@ const CHOICES = ['ROCK', 'PAPER', 'SCISSORS'];
 let player = 0;
 let computer = 0;
 
-
-//Play 5 rounds
-for (i = 0; i < 5; i++) {
-    let computerSelection = getComputerChoice();
-    console.log(computerSelection);
-
-    //Get user's input of rock, paper or scissors, store in playerSelection
-    let playerSelection = prompt('Enter Rock, Paper or Scissors, please:');
-    while (playerSelection.toUpperCase() !== 'ROCK' && playerSelection.toUpperCase() !== 'PAPER' && playerSelection.toUpperCase() !== 'SCISSORS') {
-        playerSelection = prompt('Hmm... why don\'t we try that again. Rock, paper or scissors, please.');
-    }
-    console.log(playerSelection);
-
-    // Determine if win, loss or tie
-    if (playRound(playerSelection, computerSelection) === 'TIE') {
-        console.log('Tie game!');
-    } else if (playRound(playerSelection, computerSelection) === true) {
-        player++;
-        console.log('Congrats! ' + playerSelection.toUpperCase() + ' beats ' + computerSelection + '!');
-    } else if (playRound(playerSelection, computerSelection) === false) {
-        computer++;
-        console.log('Sorry! ' + computerSelection + ' beats ' + playerSelection.toUpperCase() + '!');
-    }
-    console.log('Player: ' + player + '. Computer: ' + computer + '.');
-}
+game();
 
 
-
-// Write function getComputerChoice to randomly return 'Rock' 'Paper' or 'Scissor' store as computerSelection
+//getComputerChoice to randomly return 'Rock' 'Paper' or 'Scissor' store as computerSelection
 function getComputerChoice() {
     let choice = CHOICES[Math.floor(Math.random() * 3)];
     return choice;
@@ -59,5 +34,49 @@ function playRound (player, comp) {
         } else if (comp === 'PAPER') {
             return true;
         }
+    }
+}
+
+
+// Determine if win, loss or tie and iterate points for winner
+function winOrLose(result) {
+    if (result === 'TIE') {
+        console.log('Tie game!');
+    } else if (result === true) {
+        player++;
+        console.log('Congrats! You\'ve won this round!');
+    } else if (result === false) {
+        computer++;
+        console.log('Sorry! You\'ve lost this round!');
+        //alert('Sorry! ' + computerSelection + ' beats ' + playerSelection.toUpperCase() + '!');
+    }
+    console.log('Player: ' + player + '. Computer: ' + computer + '.');
+}
+
+
+//Play 5 rounds
+function game() {
+    for (i = 0; i < 5; i++) {
+        let computerSelection = getComputerChoice();
+        console.log(computerSelection);
+
+        //Get user's input of rock, paper or scissors, store in playerSelection
+        let playerSelection = prompt('Enter Rock, Paper or Scissors, please:');
+        while (playerSelection.toUpperCase() !== 'ROCK' && 
+            playerSelection.toUpperCase() !== 'PAPER' && 
+            playerSelection.toUpperCase() !== 'SCISSORS') {
+            playerSelection = prompt('Hmm... why don\'t we try that again. Rock, paper or scissors, please.');
+        }
+        console.log(playerSelection);
+
+        winOrLose(playRound(playerSelection, computerSelection));
+    }
+
+    if (player > computer) {
+        alert('Congrats! You won it all!  Player: ' + player + ' Computer: ' + computer);
+    } else if (computer > player) {
+        alert('Sorry! The computer won it all!  Player: ' + player + ' Computer: ' + computer);
+    } else {
+        alert('Tie game!  Player: ' + player + ' Computer: ' + computer);
     }
 }
