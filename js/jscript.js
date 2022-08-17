@@ -2,8 +2,32 @@ const CHOICES = ['ROCK', 'PAPER', 'SCISSORS'];
 let player = 0;
 let computer = 0;
 
-game();
+//game();
 
+getPlayerChoice();
+
+function getPlayerChoice() {
+    let buttons = document.querySelectorAll('button');
+    console.log(buttons);
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            alert(button.id);
+        })
+    })
+        
+    };
+        // Previous implementation used a prompt to get user's input
+        // //Get user's input of rock, paper or scissors, store in playerSelection
+        // let playerSelection = prompt('Enter Rock, Paper or Scissors, please:');
+        // while (playerSelection.toUpperCase() !== 'ROCK' && 
+        //     playerSelection.toUpperCase() !== 'PAPER' && 
+        //     playerSelection.toUpperCase() !== 'SCISSORS') {
+        //     playerSelection = prompt('Hmm... why don\'t we try that again. Rock, paper or scissors, please.');
+        // }
+        // console.log(playerSelection);
+        // return playerSelection;
+
+// }
 
 //getComputerChoice to randomly return 'Rock' 'Paper' or 'Scissor' store as computerSelection
 function getComputerChoice() {
@@ -41,18 +65,17 @@ function playRound (player, comp) {
 // Determine if win, loss or tie and iterate points for winner
 function winOrLose(result) {
     if (result === 'TIE') {
-        console.log('Tie game!');
+        alert('Tie game!');
     } else if (result === true) {
         player++;
-        console.log('Congrats! You\'ve won this round!');
+        alert('Congrats! You\'ve won this round!');
     } else if (result === false) {
         computer++;
-        console.log('Sorry! You\'ve lost this round!');
+        alert('Sorry! You\'ve lost this round!');
         //alert('Sorry! ' + computerSelection + ' beats ' + playerSelection.toUpperCase() + '!');
     }
     console.log('Player: ' + player + '. Computer: ' + computer + '.');
 }
-
 
 //Play 5 rounds
 function game() {
@@ -60,14 +83,7 @@ function game() {
         let computerSelection = getComputerChoice();
         console.log(computerSelection);
 
-        //Get user's input of rock, paper or scissors, store in playerSelection
-        let playerSelection = prompt('Enter Rock, Paper or Scissors, please:');
-        while (playerSelection.toUpperCase() !== 'ROCK' && 
-            playerSelection.toUpperCase() !== 'PAPER' && 
-            playerSelection.toUpperCase() !== 'SCISSORS') {
-            playerSelection = prompt('Hmm... why don\'t we try that again. Rock, paper or scissors, please.');
-        }
-        console.log(playerSelection);
+        let playerSelection = getPlayerChoice();
 
         winOrLose(playRound(playerSelection, computerSelection));
     }
